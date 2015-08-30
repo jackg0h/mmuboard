@@ -1,3 +1,5 @@
+import javafx.geometry.Pos;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -54,6 +56,33 @@ public abstract class Dash extends JFrame {
         JButton addSubjectBtn = new JButton("Add Subject");
         leftPanel.add(addSubjectBtn, BorderLayout.SOUTH);
 
+        addSubjectBtn.addActionListener(e -> {
+            JTextField xField = new JTextField(5);
+            JTextField yField = new JTextField(20);
+
+            JPanel myPanel = new JPanel();
+            myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+            myPanel.add(new JLabel("Subject Name"));
+            myPanel.add(xField);
+            myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+            myPanel.add(new JLabel("Subject Description"));
+            myPanel.add(yField);
+
+            int result = JOptionPane.showConfirmDialog(null, myPanel,
+                    "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+                if (Subject.create(xField.getText(), yField.getText())) {
+                    jLeftList.setModel(Subject.getSubjects());
+                    leftPanel.invalidate();
+                    leftPanel.repaint();
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR BOYZ!");
+                }
+            }
+        });
+
+
+
         jMiddleList = new JList(Topic.getTopicsBySubjectId(1));
         jMiddleList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jMiddleList.setLayoutOrientation(JList.VERTICAL);
@@ -62,15 +91,6 @@ public abstract class Dash extends JFrame {
         middleListScroller.setPreferredSize(new Dimension(375, 80));
         JButton addTopicBtn = new JButton("Add Topic");
         middlePanel.add(addTopicBtn, BorderLayout.SOUTH);
-
-        jRightList = new JList(Post.getPostByTopicId(1));
-        jRightList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        jRightList.setLayoutOrientation(JList.VERTICAL);
-        jRightList.setVisibleRowCount(-1);
-        jRightList.setCellRenderer(new PostRenderer());
-        JScrollPane rightListScroller = new JScrollPane(jRightList);
-        JButton addPostBtn = new JButton("Add Reply");
-        rightPanel.add(addPostBtn, BorderLayout.SOUTH);
 
         addTopicBtn.addActionListener(new ActionListener() {
             @Override
@@ -93,6 +113,45 @@ public abstract class Dash extends JFrame {
                         jMiddleList.setModel(Topic.getTopicsBySubjectId(current_subject));
                         middlePanel.invalidate();
                         middlePanel.repaint();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR BOYZ!");
+                    }
+                }
+            }
+        });
+
+
+
+        jRightList = new JList(Post.getPostByTopicId(1));
+        jRightList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jRightList.setLayoutOrientation(JList.VERTICAL);
+        jRightList.setVisibleRowCount(-1);
+        jRightList.setCellRenderer(new PostRenderer());
+        JScrollPane rightListScroller = new JScrollPane(jRightList);
+        JButton addPostBtn = new JButton("Add Reply");
+        rightPanel.add(addPostBtn, BorderLayout.SOUTH);
+
+        addPostBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextField xField = new JTextField(5);
+                JTextField yField = new JTextField(20);
+
+                JPanel myPanel = new JPanel();
+                myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+                myPanel.add(new JLabel("Topic Name"));
+                myPanel.add(xField);
+                myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+                myPanel.add(new JLabel("Topic Description"));
+                myPanel.add(yField);
+
+                int result = JOptionPane.showConfirmDialog(null, myPanel,
+                        "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+                if (result == JOptionPane.OK_OPTION) {
+                    if (Post.create(current_topic, xField.getText(), yField.getText())) {
+                        jRightList.setModel(Post.getPostByTopicId(current_topic));
+                        rightPanel.invalidate();
+                        rightPanel.repaint();
                     }else {
                         JOptionPane.showMessageDialog(null, "ERROR BOYZ!");
                     }

@@ -58,4 +58,23 @@ public class Post  {
 
         return model;
     }
+    public static boolean create(int topicId, String postTitle, String postContents){
+        Connection conn = DBConnection.ConnectDb();
+        try {
+            String insertTableSQL = "INSERT INTO post"
+                    + "(topic_id, title, contents, user_id) VALUES"
+                    + "(?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(insertTableSQL);
+            pst.setInt(1, topicId);
+            pst.setString(2, postTitle);
+            pst.setString(3, postContents);
+            pst.setInt(4, 1);
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e) {
+            e.printStackTrace();
+            return false;
+
+        }
+    }
 }

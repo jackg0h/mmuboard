@@ -12,6 +12,7 @@ import java.util.Observable;
 public class Subject {
     private int subjectId;
     private String subjectName;
+    private String subjectDescription;
     public int getSubjectId() {
         return this.subjectId;
     }
@@ -48,5 +49,23 @@ public class Subject {
         }
 
         return model;
+    }
+    static public boolean create(String subjectName, String subjectDescription) {
+        Connection conn = DBConnection.ConnectDb();
+        try {
+            String insertTableSQL = "INSERT INTO subject"
+                    + "(name, description, user_id) VALUES"
+                    + "(?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(insertTableSQL);
+            pst.setString(1, subjectName);
+            pst.setString(2, subjectDescription);
+            pst.setInt(3, 1);
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e) {
+            e.printStackTrace();
+            return false;
+
+        }
     }
 }
