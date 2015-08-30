@@ -11,6 +11,7 @@ import java.sql.*;
  */
 public abstract class Dash extends JFrame {
     private JLabel usernameLabel;
+    private JList jLeftList, jMiddleList, jRightList;
     private JButton jButton;
     public Dash() {
         initComponents();
@@ -19,10 +20,14 @@ public abstract class Dash extends JFrame {
 
         usernameLabel = new JLabel("Testing BOyz");
         jButton = new JButton("Testing");
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+        JSplitPane innerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+        JSplitPane outerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         JPanel leftPanel = new JPanel();
+        JPanel middlePanel = new JPanel();
         JPanel rightPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         JButton btn = new JButton("Click here to login");
         btn.addActionListener(new ActionListener() {
             @Override
@@ -36,24 +41,58 @@ public abstract class Dash extends JFrame {
             }
         });
 //        leftPanel.add(btn);
-        JList jList = new JList(Subject.getSubjects());
-        jList.addListSelectionListener(new ListSelectionListener() {
+        jLeftList = new JList(Subject.getSubjects());
+        jLeftList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jLeftList.setLayoutOrientation(JList.VERTICAL);
+        jLeftList.setVisibleRowCount(-1);
+        JScrollPane leftListScroller = new JScrollPane(jLeftList);
+        leftListScroller.setPreferredSize(new Dimension(150, 80));
+
+        jMiddleList = new JList(Topic.getTopicsBySubjectId(1));
+        jMiddleList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jMiddleList.setLayoutOrientation(JList.VERTICAL);
+        jMiddleList.setVisibleRowCount(-1);
+        JScrollPane middleListScroller = new JScrollPane(jMiddleList);
+        middleListScroller.setPreferredSize(new Dimension(375,80));
+
+        jRightList = new JList(Post.getPostByTopicId(1));
+        jRightList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jRightList.setLayoutOrientation(JList.VERTICAL);
+        jRightList.setVisibleRowCount(-1);
+        JScrollPane rightListScroller = new JScrollPane(jRightList);
+
+        jLeftList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if(e.getValueIsAdjusting()) {
-                    Object object = jList.getModel().getElementAt(e.getLastIndex());
-                    int id = ((Subject)object).getSubjectId();
-                    JList topicList = new JList(Topic.getTopicsById(id));
-                    JOptionPane.showMessageDialog(null, "Detected Student!");
-                    rightPanel.add(topicList);
+                if (e.getValueIsAdjusting()) {
+                    Subject subject = (Subject) ((JList) e.getSource())
+                            .getSelectedValue();
+                    jMiddleList.setModel(Topic.getTopicsBySubjectId(subject.getSubjectId()));
+                    jMiddleList.addListSelectionListener(new ListSelectionListener() {
+                        @Override
+                        public void valueChanged(ListSelectionEvent e) {
+                            if(e.getValueIsAdjusting()) {
+                                Topic topic = (Topic) ((JList) e.getSource())
+                                        .getSelectedValue();
+                                jRightList.setModel(Post.getPostByTopicId(topic.getTopicId()));
+                                rightPanel.invalidate();
+                                rightPanel.repaint();
+                            }
+                        }
+                    });
+                    middlePanel.invalidate();
+                    middlePanel.repaint();
                 }
             }
         });
-        leftPanel.add(jList);
-        rightPanel.add(jButton);
-        splitPane.setLeftComponent(leftPanel);
-        splitPane.setRightComponent(rightPanel);
-        add(splitPane, BorderLayout.CENTER);
+        leftPanel.add(leftListScroller);
+        middlePanel.add(middleListScroller);
+        rightPanel.add(rightListScroller);
+        innerSplitPane.setLeftComponent(leftPanel);
+        innerSplitPane.setRightComponent(middlePanel);
+        outerSplitPane.setLeftComponent(innerSplitPane);
+        outerSplitPane.setRightComponent(rightPanel);
+        add(outerSplitPane, BorderLayout.CENTER);
 
     }
 }

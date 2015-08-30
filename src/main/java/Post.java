@@ -3,32 +3,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Hii on 8/30/15.
  */
-public class Topic {
-    private int topicId;
-    private String topicTitle;
+public class Post {
+    private int postId;
+    private String postTitle;
 
-    public Topic(int topicId, String topicTitle) {
-        this.topicId = topicId;
-        this.topicTitle = topicTitle;
+    public Post(int postId, String postTitle) {
+        this.postId = postId;
+        this.postTitle = postTitle;
     }
 
-    Topic() {
+    Post() {
         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int getTopicId() {
-        return topicId;
+    public int getPostId() {
+        return postId;
     }
 
     public String getTopicTitle() {
-        return topicTitle;
+        return postTitle;
     }
 
     @Override
@@ -38,18 +35,18 @@ public class Topic {
                 getTopicTitle());
     }
 
-    public static ListModel getTopicsBySubjectId(int subjectId) {
+    public static ListModel getPostByTopicId(int topicId) {
 
-        DefaultListModel<Topic> model = new DefaultListModel<>();
+        DefaultListModel<Post> model = new DefaultListModel<>();
 
         Connection conn = DBConnection.ConnectDb();
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM `topic` where subject_id="+ subjectId);
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM `post` where topic_id="+ topicId);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String topicTitle = rs.getString("title");
-                int topicId = rs.getInt("id");
-                Topic topicInfo = new Topic(topicId, topicTitle);
+                String postTitle = rs.getString("title");
+                int postId = rs.getInt("id");
+                Post topicInfo = new Post(postId, postTitle);
                 model.addElement(topicInfo);
             }
         } catch (Exception e) {
