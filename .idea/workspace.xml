@@ -65,22 +65,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dash.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Dash.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Dash.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="5" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.4256757">
+              <caret line="137" column="55" selection-start-line="137" selection-start-column="55" selection-end-line="137" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#587#588#0" expanded="true" />
+                <element signature="e#619#620#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Post.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Post.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Post.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5490982">
+            <state vertical-scroll-proportion="0.0">
               <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -107,7 +109,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Topic.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="9" selection-start-line="61" selection-start-column="8" selection-end-line="77" selection-end-column="9" />
+              <caret line="42" column="64" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -119,7 +121,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Subject.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
+              <caret line="32" column="27" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#402#403#0" expanded="true" />
@@ -410,9 +412,9 @@
         <option value="$PROJECT_DIR$/src/main/java/LecturerDash.java" />
         <option value="$PROJECT_DIR$/src/main/java/PostRenderer.java" />
         <option value="$PROJECT_DIR$/src/main/java/Topic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Dash.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Subject.java" />
         <option value="$PROJECT_DIR$/src/main/java/Post.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Subject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Dash.java" />
       </list>
     </option>
   </component>
@@ -821,6 +823,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#619#620#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -923,22 +927,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Topic.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Post.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="9" selection-start-line="61" selection-start-column="8" selection-end-line="77" selection-end-column="9" />
+          <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Dash.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="5" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#878#879#0" expanded="true" />
+            <element signature="e#964#965#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -946,7 +942,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Subject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
+          <caret line="32" column="27" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#402#403#0" expanded="true" />
@@ -955,14 +951,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Post.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Topic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5490982">
-          <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="64" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#878#879#0" expanded="true" />
-            <element signature="e#964#965#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Dash.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4256757">
+          <caret line="137" column="55" selection-start-line="137" selection-start-column="55" selection-end-line="137" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#619#620#0" expanded="true" />
           </folding>
         </state>
       </provider>
