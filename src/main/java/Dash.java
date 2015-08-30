@@ -13,6 +13,10 @@ public abstract class Dash extends JFrame {
     private JLabel usernameLabel;
     private JList jLeftList, jMiddleList, jRightList;
     private JButton jButton;
+    private int current_subject = 1;
+    private int current_topic = 1;
+//    private int current_post = 1;
+
     public Dash() {
         initComponents();
     }
@@ -68,12 +72,42 @@ public abstract class Dash extends JFrame {
         JButton addPostBtn = new JButton("Add Reply");
         rightPanel.add(addPostBtn, BorderLayout.SOUTH);
 
+        addTopicBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextField xField = new JTextField(5);
+                JTextField yField = new JTextField(20);
+
+                JPanel myPanel = new JPanel();
+                myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+                myPanel.add(new JLabel("Topic Name"));
+                myPanel.add(xField);
+                myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+                myPanel.add(new JLabel("Topic Description"));
+                myPanel.add(yField);
+
+                int result = JOptionPane.showConfirmDialog(null, myPanel,
+                        "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+                if (result == JOptionPane.OK_OPTION) {
+                    if (Topic.create(current_subject, xField.getText(), yField.getText())) {
+                        jMiddleList.setModel(Topic.getTopicsBySubjectId(current_subject));
+                        middlePanel.invalidate();
+                        middlePanel.repaint();
+                    }else {
+                        JOptionPane.showMessageDialog(null, "ERROR BOYZ!");
+                    }
+                }
+            }
+        });
+
         jLeftList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
+
                     Subject subject = (Subject) ((JList) e.getSource())
                             .getSelectedValue();
+                    current_subject = subject.getSubjectId();
                     jMiddleList.setModel(Topic.getTopicsBySubjectId(subject.getSubjectId()));
                     jMiddleList.addListSelectionListener(new ListSelectionListener() {
                         @Override
@@ -82,6 +116,7 @@ public abstract class Dash extends JFrame {
                                 Topic topic = (Topic) ((JList) e.getSource())
                                         .getSelectedValue();
                                 jRightList.setModel(Post.getPostByTopicId(topic.getTopicId()));
+                                current_topic = topic.getTopicId();
                                 rightPanel.invalidate();
                                 rightPanel.repaint();
                             }

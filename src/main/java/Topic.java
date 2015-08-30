@@ -58,4 +58,23 @@ public class Topic {
 
         return model;
     }
+    public static boolean create(int subjectId, String topicTitle, String topicDescription) {
+        Connection conn = DBConnection.ConnectDb();
+        try {
+            String insertTableSQL = "INSERT INTO topic"
+                    + "(subject_id, title, description, user_id) VALUES"
+                    + "(?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(insertTableSQL);
+            pst.setInt(1, subjectId);
+            pst.setString(2, topicTitle);
+            pst.setString(3, topicDescription);
+            pst.setInt(4, 1);
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e) {
+            e.printStackTrace();
+            return false;
+
+        }
+    }
 }
