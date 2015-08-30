@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,9 +35,20 @@ public abstract class Dash extends JFrame {
                 }
             }
         });
-        leftPanel.add(btn);
+//        leftPanel.add(btn);
         JList jList = new JList(Subject.getSubjects());
-        jList.setSize(leftPanel.getWidth(), jList.getHeight());
+        jList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(e.getValueIsAdjusting()) {
+                    Object object = jList.getModel().getElementAt(e.getLastIndex());
+                    int id = ((Subject)object).getSubjectId();
+                    JList topicList = new JList(Topic.getTopicsById(id));
+                    JOptionPane.showMessageDialog(null, "Detected Student!");
+                    rightPanel.add(topicList);
+                }
+            }
+        });
         leftPanel.add(jList);
         rightPanel.add(jButton);
         splitPane.setLeftComponent(leftPanel);
