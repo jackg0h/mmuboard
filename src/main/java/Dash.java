@@ -47,19 +47,26 @@ public abstract class Dash extends JFrame {
         jLeftList.setVisibleRowCount(-1);
         JScrollPane leftListScroller = new JScrollPane(jLeftList);
         leftListScroller.setPreferredSize(new Dimension(150, 80));
+        JButton addSubjectBtn = new JButton("Add Subject");
+        leftPanel.add(addSubjectBtn, BorderLayout.SOUTH);
 
         jMiddleList = new JList(Topic.getTopicsBySubjectId(1));
         jMiddleList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jMiddleList.setLayoutOrientation(JList.VERTICAL);
         jMiddleList.setVisibleRowCount(-1);
         JScrollPane middleListScroller = new JScrollPane(jMiddleList);
-        middleListScroller.setPreferredSize(new Dimension(375,80));
+        middleListScroller.setPreferredSize(new Dimension(375, 80));
+        JButton addTopicBtn = new JButton("Add Topic");
+        middlePanel.add(addTopicBtn, BorderLayout.SOUTH);
 
         jRightList = new JList(Post.getPostByTopicId(1));
         jRightList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jRightList.setLayoutOrientation(JList.VERTICAL);
         jRightList.setVisibleRowCount(-1);
+        jRightList.setCellRenderer(new PostRenderer());
         JScrollPane rightListScroller = new JScrollPane(jRightList);
+        JButton addPostBtn = new JButton("Add Reply");
+        rightPanel.add(addPostBtn, BorderLayout.SOUTH);
 
         jLeftList.addListSelectionListener(new ListSelectionListener() {
             @Override

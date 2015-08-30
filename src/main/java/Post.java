@@ -7,13 +7,15 @@ import java.text.MessageFormat;
 /**
  * Created by Hii on 8/30/15.
  */
-public class Post {
+public class Post  {
     private int postId;
     private String postTitle;
+    private String postContents;
 
-    public Post(int postId, String postTitle) {
+    public Post(int postId, String postTitle, String postContents) {
         this.postId = postId;
         this.postTitle = postTitle;
+        this.postContents = postContents;
     }
 
     Post() {
@@ -24,15 +26,16 @@ public class Post {
         return postId;
     }
 
-    public String getTopicTitle() {
+    public String getPostTitle() {
         return postTitle;
+    }
+    public String getPostContents() {
+        return postContents;
     }
 
     @Override
     public String toString() {
-        return MessageFormat.format("{0}",
-                // getSubjectId(),
-                getTopicTitle());
+        return "<html><b>" + postTitle + "</b><br>" + postContents + "</html>";
     }
 
     public static ListModel getPostByTopicId(int topicId) {
@@ -46,7 +49,7 @@ public class Post {
             while (rs.next()) {
                 String postTitle = rs.getString("title");
                 int postId = rs.getInt("id");
-                Post topicInfo = new Post(postId, postTitle);
+                Post topicInfo = new Post(postId, postTitle,rs.getString("contents"));
                 model.addElement(topicInfo);
             }
         } catch (Exception e) {

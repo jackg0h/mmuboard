@@ -13,10 +13,11 @@ import java.util.List;
 public class Topic {
     private int topicId;
     private String topicTitle;
-
-    public Topic(int topicId, String topicTitle) {
+    private String topicDescription;
+    public Topic(int topicId, String topicTitle, String topicDescription) {
         this.topicId = topicId;
         this.topicTitle = topicTitle;
+        this.topicDescription = topicDescription;
     }
 
     Topic() {
@@ -33,9 +34,8 @@ public class Topic {
 
     @Override
     public String toString() {
-        return MessageFormat.format("{0}",
-                // getSubjectId(),
-                getTopicTitle());
+        return "<html><p style=\"line-height: 250%; padding: 15px; \"><b>" +
+                topicTitle + "</b><br>" + topicDescription + "</html>";
     }
 
     public static ListModel getTopicsBySubjectId(int subjectId) {
@@ -49,7 +49,7 @@ public class Topic {
             while (rs.next()) {
                 String topicTitle = rs.getString("title");
                 int topicId = rs.getInt("id");
-                Topic topicInfo = new Topic(topicId, topicTitle);
+                Topic topicInfo = new Topic(topicId, topicTitle, rs.getString("description"));
                 model.addElement(topicInfo);
             }
         } catch (Exception e) {
