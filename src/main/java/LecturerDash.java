@@ -4,12 +4,16 @@ import javax.swing.*;
  * Created by Hii on 8/30/15.
  */
 public class LecturerDash extends Dash {
+
+    public LecturerDash(){
+        //new LecturerDash().setVisible(true);
+    }
+
     public static void main(String args[]) {
         LecturerDash lecturerDash = new LecturerDash();
         lecturerDash.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        lecturerDash.setSize(900,500);
+
         JFrame.setDefaultLookAndFeelDecorated(true);
         lecturerDash.setVisible(true);
-
     }
 }
